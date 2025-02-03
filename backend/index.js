@@ -1,12 +1,19 @@
-// backend/index.js
 const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
+const domainRoutes = require("./routes/domainRoutes");
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(express.json());
+app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Hello from Backend!");
-});
+// Domain routes
+app.use("/", domainRoutes);
 
+const PORT = process.env.PORT || 5000;
+
+// Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
