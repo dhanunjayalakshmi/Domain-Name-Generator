@@ -97,8 +97,8 @@ const fetchPricingDataFromAPI = async () => {
 
     // Map relevant pricing data for each TLD
     const pricingData = pricingResults.map((product) => {
-      const tld = product.$.Name.toLowerCase(); // Extract TLD name
-      const prices = product.Price[0]; // Extract the first Price object
+      const tld = product.$.Name.toLowerCase();
+      const prices = product.Price[0];
 
       const priceDetails = parsePriceDetails(prices);
 
@@ -144,16 +144,18 @@ const getDomainDetails = async (domainList) => {
     }
 
     const domainAvailabilityResults = availability?.map((availableDomain) => {
-      // Combine domain availability with pricing details
+      const tld = availableDomain?.domain.split(".").pop().toLowerCase();
+      const tldPricing = pricingData.find((item) => item.tld === tld);
+
       return {
         domain: availableDomain?.domain,
         available: availableDomain?.available,
         isPremium: availableDomain?.isPremium,
         registrationPrice: availableDomain?.isPremium
           ? availableDomain?.premiumPrice
-          : availableDomain?.registrationPrice || "N/A",
-        renewalPrice: availableDomain?.renewalPrice || "N/A",
-        currency: availableDomain?.currency,
+          : tldPricing?.registrationPrice || "N/A",
+        renewalPrice: tldPricing?.renewalPrice || "N/A",
+        currency: tldPricing?.currency,
       };
     });
 
