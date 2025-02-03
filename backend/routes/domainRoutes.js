@@ -43,3 +43,23 @@ const generateNames = async (
     return null;
   }
 };
+
+router.post("/generate-names", async (req, res) => {
+  const { description, keywords } = req.body;
+
+  if (!description || !keywords) {
+    return res.status(400).json({
+      error: "Please provide project description and keywords.",
+    });
+  }
+
+  try {
+    const names = await generateNames(description, keywords);
+    // console.log("Domain suggestions...", names);
+    res.json({ names });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Failed to generate names. Try again later." });
+  }
+});
