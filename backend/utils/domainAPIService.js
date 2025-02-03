@@ -11,6 +11,18 @@ const CACHE_FILE = "pricingCache.json";
 
 const extensions = [".com", ".net", ".ai", ".io", ".tech"];
 
+const generateFullDomainNames = (domainList) => {
+  let fullDomainList = [];
+
+  domainList.forEach((base) => {
+    extensions.forEach((ext) => {
+      fullDomainList.push(`${base.toLowerCase()}${ext}`);
+    });
+  });
+
+  return fullDomainList.join(",");
+};
+
 const checkDomainAvailability = async (domainList) => {
   try {
     const response = await axios.get(NAMECHEAP_API_URL, {
@@ -45,8 +57,9 @@ const checkDomainAvailability = async (domainList) => {
 };
 
 const getDomainDetails = async (domainList) => {
+  const fullDomainList = generateFullDomainNames(domainList);
   try {
-    const availability = await checkDomainAvailability(domainList);
+    const availability = await checkDomainAvailability(fullDomainList);
 
     const domainAvailabilityResults = availability?.map((availableDomain) => {
       // Combine domain availability with pricing details
