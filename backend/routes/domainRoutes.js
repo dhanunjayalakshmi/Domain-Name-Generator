@@ -63,3 +63,45 @@ router.post("/generate-names", async (req, res) => {
       .json({ error: "Failed to generate names. Try again later." });
   }
 });
+
+router.post("/check-availability", async (req, res) => {
+  const { domains } = req?.body;
+
+  if (!domains || !Array.isArray(domains) || domains.length === 0) {
+    return res
+      .status(400)
+      .json({ error: "Please provide an array of domains." });
+  }
+
+  try {
+    const domainList = domains.map((name) =>
+      name.toLowerCase().replace(/ /g, "")
+    ); // Create a comma-separated string of domain domains
+
+    // Call Namecheap API once with the domain list
+    const response = await getDomainDetails(domainList);
+
+    const groupedResults = {};
+
+    response?.map((result) => {
+      const [baseName, extension] = result.domain.split(".");
+
+      if (!groupedResults[baseName]) {
+        groupedResults[baseName] = {};
+      }
+
+      groupedResults[baseName][extension] = {
+        available: result.available,
+        registrationPrice: result.registrationPrice,
+        currency: result.currency || "$",
+      };
+    });
+
+    res.json({ availability: groupedResults });
+  } catch (error) {
+    console.error("Error in domain checking availability:", error.message);
+    res.status(500).json({ error: "Failed to check domain availability" });
+  }
+});
+
+module.exports = router;
