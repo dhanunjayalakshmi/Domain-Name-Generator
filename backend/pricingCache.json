@@ -1,0 +1,83 @@
+[
+  {
+    "tld": "tech",
+    "registrationPrice": "45.98",
+    "additionalCost": "0.18",
+    "totalPrice": "46.16",
+    "promotionPrice": "0.00",
+    "duration": "1 YEAR",
+    "currency": "USD"
+  },
+  {
+    "tld": "io",
+    "registrationPrice": "62.98",
+    "additionalCost": "NaN",
+    "totalPrice": "NaN",
+    "promotionPrice": "0.00",
+    "duration": "1 YEAR",
+    "currency": "USD"
+  },
+  {
+    "tld": "org",
+    "registrationPrice": "14.98",
+    "additionalCost": "0.18",
+    "totalPrice": "15.16",
+    "promotionPrice": "0.00",
+    "duration": "1 YEAR",
+    "currency": "USD"
+  },
+  {
+    "tld": "com",
+    "registrationPrice": "16.98",
+    "additionalCost": "0.18",
+    "totalPrice": "17.16",
+    "promotionPrice": "0.00",
+    "duration": "1 YEAR",
+    "currency": "USD"
+  },
+  {
+    "tld": "ai",
+    "registrationPrice": "92.98",
+    "additionalCost": "NaN",
+    "totalPrice": "NaN",
+    "promotionPrice": "0.00",
+    "duration": "2 YEAR",
+    "currency": "USD"
+  },
+  {
+    "tld": "net",
+    "registrationPrice": "16.98",
+    "additionalCost": "0.18",
+    "totalPrice": "17.16",
+    "promotionPrice": "0.00",
+    "duration": "1 YEAR",
+    "currency": "USD"
+  },
+  {
+    "tld": "dev",
+    "registrationPrice": "18.98",
+    "additionalCost": "0.18",
+    "totalPrice": "19.16",
+    "promotionPrice": "0.00",
+    "duration": "1 YEAR",
+    "currency": "USD"
+  },
+  {
+    "tld": "xyz",
+    "registrationPrice": "16.98",
+    "additionalCost": "0.18",
+    "totalPrice": "17.16",
+    "promotionPrice": "0.00",
+    "duration": "1 YEAR",
+    "currency": "USD"
+  },
+  {
+    "tld": "in",
+    "registrationPrice": "9.98",
+    "additionalCost": "NaN",
+    "totalPrice": "NaN",
+    "promotionPrice": "0.00",
+    "duration": "1 YEAR",
+    "currency": "USD"
+  }
+]
