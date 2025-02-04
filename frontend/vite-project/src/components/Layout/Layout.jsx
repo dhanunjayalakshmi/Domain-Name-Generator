@@ -1,7 +1,7 @@
-import { Header } from "./Header";
-import { Hero } from "./Hero";
+import Header from "./Header";
+import Hero from "./Hero";
 
-export const Layout = (children) => {
+const Layout = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -10,3 +10,5 @@ export const Layout = (children) => {
     </div>
   );
 };
+
+export default Layout;

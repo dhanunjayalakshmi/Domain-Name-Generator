@@ -1,7 +1,7 @@
-import { Layout } from "./components/Layout/Layout";
-import { GeneratorForm } from "./components/Generator/GeneratorForm";
+import Layout from "./components/Layout/Layout";
+import GeneratorForm from "./components/Generator/GeneratorForm";
 
-export function App() {
+export default function App() {
   return (
     <Layout>
       <div className="max-w-2xl mx-auto">
