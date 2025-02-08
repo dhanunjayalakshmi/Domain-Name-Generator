@@ -1,6 +1,12 @@
 import { Wand2 } from "lucide-react";
+import { useState } from "react";
 
 const GeneratorForm = () => {
+  const [formData, setFormData] = useState({
+    description: "",
+    keywords: "",
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -16,6 +22,10 @@ const GeneratorForm = () => {
         </label>
         <textarea
           id="description"
+          value={formData.description}
+          onChange={(e) =>
+            setFormData({ ...formData, description: e.target.value })
+          }
           placeholder="Briefly describe your project (e.g., An AI tool for marketing analytics)"
           rows={4}
           className="relative w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-left shadow-sm focus:border-purple-900 focus:outline-none focus:ring-1 focus:ring-purple-900"
@@ -36,6 +46,10 @@ const GeneratorForm = () => {
         <input
           type="text"
           id="keywords"
+          value={formData.keywords}
+          onChange={(e) =>
+            setFormData({ ...formData, keywords: e.target.value })
+          }
           placeholder="Enter keywords (e.g., tech, creative, digital)"
           className="relative w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-left shadow-sm focus:border-purple-900 focus:outline-none focus:ring-1 focus:ring-purple-900"
           required
