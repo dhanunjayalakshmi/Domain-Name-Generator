@@ -1,6 +1,10 @@
 import { Check, X } from "lucide-react";
 
-const ResultsList = () => {
+const ResultsList = ({ availability }) => {
+  const extensions = Object.keys(
+    availability[Object.keys(availability)[0]] || []
+  );
+
   return (
     <div className="mt-8">
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
@@ -10,63 +14,40 @@ const ResultsList = () => {
               <th scope="col" className="px-6 py-3">
                 Domain
               </th>
-              <th scope="col" className="px-6 py-3">
-                .com
-              </th>
-              <th scope="col" className="px-6 py-3">
-                .net
-              </th>
-              <th scope="col" className="px-6 py-3">
-                .io
-              </th>
-              <th scope="col" className="px-6 py-3">
-                .ai
-              </th>
-              <th scope="col" className="px-6 py-3">
-                .tech
-              </th>
+              {extensions?.map((extension) => (
+                <th
+                  key={extension}
+                  scope="col"
+                  className="px-6 py-3"
+                >{`.${extension.toUpperCase()}`}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {[1, 2, 3, 4, 5]?.map((num) => (
+            {Object.keys(availability).map((baseName) => (
               <tr
-                key={num}
+                key={baseName}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="px-6 py-4 font-medium text-md text-gray-900 dark:text-white whitespace-nowrap">
-                  Basename{num}
+                  {baseName}
                 </td>
-                <td className="px-6 py-4 text-sm text-center">
-                  <div className="text-green-600 flex items-center justify-center">
-                    <Check className="w-5 h-5 mr-2 text-green-500" />
-                    $12
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-sm text-center">
-                  <div className="text-red-600 flex items-center justify-center">
-                    <X className="w-5 h-5 mr-2 text-red-500" />
-                    Taken
-                  </div>
-                </td>
-
-                <td className="px-6 py-4 text-sm text-center">
-                  <div className="text-green-600 flex items-center justify-center">
-                    <Check className="w-5 h-5 mr-2 text-green-500" />
-                    $16
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-sm text-center">
-                  <div className="text-red-600 flex items-center justify-center">
-                    <X className="w-5 h-5 mr-2 text-red-500" />
-                    Taken
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-sm text-center">
-                  <div className="text-green-600 flex items-center justify-center">
-                    <Check className="w-5 h-5 mr-2 text-green-500" />
-                    $15
-                  </div>
-                </td>
+                {extensions.map((extension) => (
+                  <td key={extension} className="px-6 py-4 text-sm text-center">
+                    {availability[baseName][extension] &&
+                    availability[baseName][extension].available ? (
+                      <div className="text-green-600 flex items-center justify-center">
+                        <Check className="w-5 h-5 mr-2 text-green-500" />
+                        {`${availability[baseName][extension].currency}${availability[baseName][extension].registrationPrice}`}
+                      </div>
+                    ) : (
+                      <div className="text-red-600 flex items-center justify-center">
+                        <X className="w-5 h-5 mr-2 text-red-500" />
+                        Taken
+                      </div>
+                    )}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>

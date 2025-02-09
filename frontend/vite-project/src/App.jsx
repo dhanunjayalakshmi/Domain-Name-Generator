@@ -1,6 +1,7 @@
 import Layout from "./components/Layout/Layout";
 import GeneratorForm from "./components/Generator/GeneratorForm";
 import ResultsList from "./components/Generator/ResultsList";
+import { ClipLoader } from "react-spinners";
 import { useState } from "react";
 import axios from "axios";
 
@@ -33,7 +34,7 @@ const generateNames = async (description, keywords) => {
 };
 
 export default function App() {
-  const [availability, setAvailability] = useState([]);
+  const [availability, setAvailability] = useState([] | null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -50,7 +51,6 @@ export default function App() {
       const availabilityResponse = await checkAvailability(domains);
 
       setAvailability(availabilityResponse);
-      console.log(availability);
     } catch (error) {
       console.error("Error in generating and checking domains:", error);
       setError(
@@ -66,7 +66,17 @@ export default function App() {
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <GeneratorForm onGenerate={handleGenerate} />
-          <ResultsList />
+          {error && <div className="text-red-500 mt-4">{error}</div>}
+          {loading ? (
+            <div className="flex flex-col justify-center items-center mt-8">
+              <ClipLoader size={50} color={"#4A90E2"} />
+              <p className="mt-4 text-blue-500">Generating suggestions...</p>
+            </div>
+          ) : error ? (
+            <p className="text-red-600 mt-4">{error}</p>
+          ) : availability ? (
+            <ResultsList availability={availability} />
+          ) : null}
         </div>
       </div>
     </Layout>
