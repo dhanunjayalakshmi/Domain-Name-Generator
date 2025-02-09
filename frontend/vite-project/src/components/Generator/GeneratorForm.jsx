@@ -1,7 +1,7 @@
 import { Wand2 } from "lucide-react";
 import { useState } from "react";
 
-const GeneratorForm = () => {
+const GeneratorForm = ({ onGenerate }) => {
   const [formData, setFormData] = useState({
     description: "",
     keywords: "",
@@ -9,6 +9,7 @@ const GeneratorForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onGenerate(formData);
   };
 
   return (
