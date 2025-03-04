@@ -3,8 +3,13 @@ const OpenAI = require("openai");
 const { getDomainDetails } = require("../utils/domainAPIService");
 
 const router = express.Router();
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
+
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: "https://api.deepseek.com",
+  apiKey: process.env.DEEPSEEK_API_KEY,
 });
 
 const generateNames = async (
@@ -21,14 +26,21 @@ const generateNames = async (
     `;
 
   try {
+    // const response = await openai.chat.completions.create({
+    //   model: "gpt-4", // or 'gpt-4' if you have access
+    //   messages: [{ role: "user", content: prompt }],
+    //   temperature: 0.7, // Adjust for more/less creativity
+    //   max_tokens: 200, // Should be enough tokens for ~10 suggestions
+    // });
+
     const response = await openai.chat.completions.create({
-      model: "gpt-4", // or 'gpt-4' if you have access
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.7, // Adjust for more/less creativity
-      max_tokens: 200, // Should be enough tokens for ~10 suggestions
+      messages: [{ role: "system", content: prompt }],
+      model: "deepseek-chat",
     });
 
     const rawResponse = response.choices[0].message.content.trim();
+
+    console.log("Response...", rawResponse);
 
     // Parse the response into an array of names
     const suggestions = rawResponse
