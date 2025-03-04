@@ -40,8 +40,6 @@ const generateNames = async (
 
     const rawResponse = response.choices[0].message.content.trim();
 
-    console.log("Response...", rawResponse);
-
     // Parse the response into an array of names
     const suggestions = rawResponse
       .split("\n") // Split by lines
