@@ -1,6 +1,13 @@
 const { getDomainDetails } = require("./utils/domainAPIService"); // Adjust path as necessary
+const rateLimit = require("./utils/rateLimiter");
 
 module.exports = async (req, res) => {
+  const limitStatus = rateLimit(req);
+
+  if (!limitStatus.ok) {
+    return res.status(429).send(limitStatus.message);
+  }
+
   const { domains } = req.body;
   if (!domains || !Array.isArray(domains) || domains.length === 0) {
     return res

@@ -1,4 +1,5 @@
 const OpenAI = require("openai");
+const rateLimit = require("./utils/rateLimiter");
 
 const openai = new OpenAI({
   baseURL: "https://api.deepseek.com",
@@ -31,6 +32,12 @@ async function generateNames(description, keywords, numberOfSuggestions = 10) {
 }
 
 module.exports = async (req, res) => {
+  const limitStatus = rateLimit(req);
+
+  if (!limitStatus.ok) {
+    return res.status(429).send(limitStatus.message);
+  }
+
   const { description, keywords } = req.body;
   if (!description || !keywords) {
     return res
