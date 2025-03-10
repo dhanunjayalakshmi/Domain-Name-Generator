@@ -7,11 +7,12 @@ const openai = new OpenAI({
 });
 
 async function generateNames(description, keywords, numberOfSuggestions = 10) {
-  const prompt = `Generate ${numberOfSuggestions} simple, short, creative, catchy and unique domain name suggestions for the following project:
+  const prompt = `Generate ${numberOfSuggestions} simple, short, creative, new, catchy and unique domain name suggestions for the following project:
     Project Description: ${description}.
     Keywords: ${keywords.join(", ")}.
     Dont add any extension to the domain name.
-    Ensure the domain names align with fresh, modern, professional, and memorable branding style. 
+    Provide a list of domain names that are catchy, brandable, and reflect the meaning of the keywords.
+    Make sure to give the names that are available to register.
     Provide suggestions as a clean list with no numbering or additional formatting.`;
 
   try {

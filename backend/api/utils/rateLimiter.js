@@ -1,4 +1,4 @@
-const RATE_LIMIT = 5; // Max number of requests per hour
+const RATE_LIMIT = 15; // Max number of requests per hour
 const RATE_LIMIT_WINDOW = 3600000; // 1 hour in milliseconds
 
 let visitors = {}; // This will reset when the function cold starts

@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
     <div className="min-h-screen bg-gray-50">
       <Header />
       <Hero />
-      <main className="container mx-auto px-4 py-12 -mt-8">{children}</main>
+      <main className="container mx-auto px-2 py-12 -mt-8">{children}</main>
     </div>
   );
 };

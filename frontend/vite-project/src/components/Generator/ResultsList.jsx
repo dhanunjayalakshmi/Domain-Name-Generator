@@ -8,7 +8,7 @@ const ResultsList = ({ availability }) => {
   return (
     <div className="mt-8">
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="min-w-full lg:min-w-max text-md text-left text-gray-500 dark:text-gray-400">
+        <table className="w-full mx-auto lg:min-w-max text-md text-left rounded-lg text-gray-500 dark:text-gray-400">
           <thead className="text-md text-white uppercase bg-purple-600 dark:bg-purple-700">
             <tr>
               <th scope="col" className="px-6 py-3">

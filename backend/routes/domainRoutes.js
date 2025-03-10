@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const generateNamesAPI = require("../../api/generate-names");
-const checkAvailabilityAPI = require("../../api/check-availability");
-// const rateLimiter = require("../../api/utils/rateLimiter");
+const generateNamesAPI = require("../api/generate-names");
+const checkAvailabilityAPI = require("../api/check-availability");
 
 router.post("/generate-names", (req, res) => {
   generateNamesAPI(req, res);

@@ -78,7 +78,7 @@ export default function App() {
 
   return (
     <Layout>
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <GeneratorForm onGenerate={handleGenerate} />
           {error && <div className="text-red-500 mt-4">{error}</div>}
