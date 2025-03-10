@@ -4,12 +4,17 @@ const fs = require("fs");
 const parser = new xml2js.Parser();
 
 const API_KEY = process.env.NAMECHEAP_API_KEY;
-const IP_ADDRESS = process.env.CLIENT_IP_ADDRESS;
 const USERNAME = process.env.NAMECHEAP_USERNAME;
 const NAMECHEAP_API_URL = process.env.NAMECHEAP_API_URL;
 const CACHE_FILE = "pricingCache.json";
 
 const extensions = [".com", ".net", ".ai", ".io", ".tech"];
+
+const IP_LIST = process.env.CLIENT_IP_ADDRESS_LIST.split(",");
+
+function getRandomIP() {
+  return IP_LIST[Math.floor(Math.random() * IP_LIST.length)];
+}
 
 const generateFullDomainNames = (domainList) => {
   let fullDomainList = [];
@@ -31,7 +36,7 @@ const checkDomainAvailability = async (domainList) => {
         ApiKey: API_KEY,
         UserName: USERNAME,
         Command: "namecheap.domains.check",
-        ClientIp: IP_ADDRESS,
+        ClientIp: getRandomIP(),
         DomainList: domainList,
       },
     });
