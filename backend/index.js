@@ -8,6 +8,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use((req, res, next) => {
+  console.log(
+    `API Request - ${req.method} ${req.path} from IP: ${
+      req.ip
+    } at ${new Date().toISOString()}`
+  );
+  next();
+});
+
 // Domain routes
 app.use("/", domainRoutes);
 
