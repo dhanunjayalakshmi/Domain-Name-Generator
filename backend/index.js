@@ -6,7 +6,13 @@ const domainRoutes = require("./routes/domainRoutes");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://domain-name-generator-kappa.vercel.app", // Your frontend URL
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+  })
+);
 
 app.use((req, res, next) => {
   console.log(
